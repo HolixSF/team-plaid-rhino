@@ -1,2 +1,2 @@
-# team-plaid-rhino
+# Team-Plaid-Rhino
 DBC Overflow Group Project
