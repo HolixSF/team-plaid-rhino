@@ -2,7 +2,7 @@
 DBC Overflow Group Project
 
 
-![overflow-schema]('imgs/dbc-overflow-schema.png')
+![overflow-schema](imgs/dbc-overflow-schema.png)
 
 Polymorphisms:
 Votes -->
