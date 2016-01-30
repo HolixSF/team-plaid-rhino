@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   validates :username, presence: true
   validates :username, uniqueness: true
-  validates :password, presence: true
+  validate :password
 
   has_many :votes
   has_many :questions
@@ -11,13 +11,19 @@ class User < ActiveRecord::Base
   include BCrypt
 
   def password
-    @password ||= Password.new(password_hash)
+    if password_hash
+      @password ||= Password.new(password_hash)
+    else
+      errors.add(:password, "can't be left blank")
+    end
   end
 
 
   def password=(new_password)
-    @password = Password.create(new_password)
-    self.password_hash = @password
+    if !new_password.empty?
+      @password = Password.create(new_password)
+      self.password_hash = @password
+    end
   end
 
   def self.authenticate(user_info)

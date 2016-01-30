@@ -8,4 +8,10 @@
 
 .text-muted a {
     color: hotpink;
+    text-decoration: none;
+}
+
+#rhino_logo {
+  width: 60px;
+  margin-right:5px;
 }
