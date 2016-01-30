@@ -4,6 +4,7 @@ gem 'rake'
 
 # Sinatra driver
 gem 'sinatra'
+gem 'sinatra-namespace'
 gem 'sinatra-contrib'
 gem 'sinatra-partial'
 
