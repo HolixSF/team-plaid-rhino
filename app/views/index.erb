@@ -1,3 +1,22 @@
 <div class="container">
-  <h1>Welcome to My Website!</h1>
+  <div class="jumbotron">
+    <h1>Welcome to PlaidRhinoFlow</h1>
+    <p class="lead">This site is about to change your life baby.</p>
+    <p><a class="btn btn-lg btn-success" href="/users/new" role="button">Sign up</a></p>
+    <p>Or <a href="/sessions/new">login!</a></p>
+  </div>
 </div>
+  <div class="row marketing">
+
+    <div class="col-md-6 col-md-offset-3">
+      <a class="btn btn-default" href="/questions/new" role="button">Post Question</a>
+    </div>
+
+    <div class="col-md-6 col-md-offset-3">
+      <% @questions.each do |question| %>
+        <h4><a href="/questions/<%=question.id%>"><%= question.title %>?</a></h4>
+        <p><%= question.answers.first.text %></p>
+      <% end %>
+
+    </div>
+  </div>

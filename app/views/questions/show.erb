@@ -1,0 +1,21 @@
+<div class='container'>
+<h1><%= @question.title %>?</h1>
+<h4><%= @question.text %>?</h4>
+<br>
+<% @question.answers.each_with_index do |answer, i| %>
+  <div><%= "#{i+1}. #{answer.text}" %></div><br>
+<% end %>
+</div>
+
+
+
+<br><br><br><br><br><br>
+
+<p>Display response to questions</p>
+<p>Button to respond to question (if logged in)</p>
+
+<p>Displays responses to answers</p>
+<p>button to respond to answer (if logged in)</p>
+
+<p>Displays votes on questions, answers, responses</p>
+<p>Button to vote on questions, answers, responses (if logged in)</p>

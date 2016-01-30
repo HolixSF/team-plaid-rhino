@@ -1,7 +1,18 @@
 get '/' do
-  if current_user
-    redirect to "/users/#{current_user.id}"
-  else
-    erb :login
-  end
+  redirect '/questions'
+end
+
+get '/questions' do
+  @questions=Question.all
+  erb :index
+end
+
+
+get '/sessions/new' do
+  erb :login
+end
+
+
+post '/questions/new' do
+  erb :index
 end
