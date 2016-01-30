@@ -5,11 +5,11 @@ end
 
 # Create
 post '/users' do
-    @user = User.new(params)
-    if @user.save
-      redirect '/'
-    else
-      @errors = @user.errors.full_messages
-      erb :"/users/new"
-    end
+  @user = User.new(params)
+  if @user.save
+    redirect '/'
+  else
+    @errors = @user.errors.full_messages
+    erb :"/users/new"
+  end
 end
