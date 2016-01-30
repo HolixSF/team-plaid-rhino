@@ -1,5 +1,5 @@
 get '/questions' do
-  @questions=Question.all
+  @questions = Question.all
   erb :"questions/index"
 end
 
@@ -12,7 +12,12 @@ post '/questions' do
   if @question.save
     redirect "/questions/#{@question.id}"
   else
-    @errors = @question.errors.full_messages
+    if @question.errors
+      @errors = []
+      @question.errors.full_messages.each do |error|
+        @errors << error.split(' ')[1..-1].join(' ')
+      end
+    end
     erb :'/questions/new'
   end
 end

@@ -1,7 +1,7 @@
 <div class='container'>
   <div>
-    <h1><%= @question.title %>?</h1>
-    <h4><%= @question.text %>?</h4>
+    <h1><%= @question.title %></h1>
+    <h4><%= @question.text %></h4>
   </div>
 
     <!-- Responses to question -->
@@ -13,15 +13,7 @@
 
     <!-- Post response to question -->
     <div>
-      <form class="form-horizontal" method="POST" action="/questions/:id/responses">
-
-        <div class="form-group">
-          <label for="responseQuestion">Response to question:</label>
-          <textarea class="form-control" name="description" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-        </div>
-      </form>
+      <a href="/questions/<%= @question.id %>/responses/new">Respond to question</a>
     </div>
 
   <!-- Answers to question -->
@@ -35,7 +27,7 @@
           <% end %>
 
           <div>
-            <!-- Post response to question -->
+            <!-- Post response to answer -->
             <form class="form-horizontal" method="POST" action="/questions/:id/answers/:id/responses">
               <div class="form-group">
                 <label for="responseAnswer">Response to answer:</label>
