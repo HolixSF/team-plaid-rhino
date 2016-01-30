@@ -17,6 +17,7 @@ require 'logger'
 
 require 'sinatra'
 require 'sinatra/partial'
+require 'sinatra/namespace'
 require 'sinatra/reloader' if development?
 require 'pry' if development?
 
