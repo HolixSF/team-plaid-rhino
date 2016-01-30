@@ -16,8 +16,10 @@
 
     <div class="col-md-6 col-md-offset-3">
       <% @questions.each do |question| %>
-        <h4><a href="/questions/<%=question.id%>"><%= question.title %>?</a></h4>
-        <p><%= question.answers.first.text %></p>
+        <h4><a href="/questions/<%=question.id%>"><%= question.title %></a></h4>
+        <% if !question.answers.empty? %>
+          <p><%= question.answers.first.text %></p>
+        <% end %>
       <% end %>
 
     </div>

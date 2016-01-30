@@ -1,16 +1,18 @@
 
-  get '/responses/new' do
-    erb :"/responses/new"
+  get '/questions/:id/responses/new' do
+    @question = Question.find(params[:id])
+    erb :"responses/_new_to_question"
   end
 
-  post '/responses' do
-    @response = Response.new(params)
+  post '/questions/:id/responses' do
+    @question = Question.find(params[:id])
+    response = Response.new(user_id: session[:user_id], text: params[:text], response_to: @question)
 
-    if @response.save
-      erb :"/questions/#{@question.id}"
+    if response.save
+      redirect "/questions/#{@question.id}"
     else
-      @errors = @question.errors.full_messages
-      erb :"/responses/new"
+      @errors = response.errors.full_messages
+      erb :"/responses/_new_to_question"
     end
 
   end
