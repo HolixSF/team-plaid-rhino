@@ -1,12 +1,15 @@
-post '/login' do
-  user = User.authenticate(email: params[:email], password: params[:password])
+post '/sessions/new' do
 
-  if user
-    session[:user_id] = user.id
-    redirect to "users/#{current_user.id}"
-  else
-    redirect to home_url # see app/helpers/
-  end
+erb :index
+
+  # user = User.authenticate(email: params[:email], password: params[:password])
+
+  # if user
+  #   session[:user_id] = user.id
+  #   redirect to "users/#{current_user.id}"
+  # else
+  #   redirect to home_url # see app/helpers/
+  # end
 end
 
 post '/logout' do
