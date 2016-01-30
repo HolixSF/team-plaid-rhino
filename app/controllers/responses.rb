@@ -1,8 +1,3 @@
-namespace '/questions/:id' do
-
-  before do
-    @question = Question.find(params[:id])
-  end
 
   get '/responses/new' do
     erb :"/responses/new"
@@ -20,4 +15,3 @@ namespace '/questions/:id' do
 
   end
 
-end
