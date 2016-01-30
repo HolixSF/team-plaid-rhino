@@ -3,7 +3,10 @@ class User < ActiveRecord::Base
   validates :username, uniqueness: true
   validates :password, presence: true
 
-  has_many :votes, :questions, :answers, :responses
+  has_many :votes
+  has_many :questions
+  has_many :answers
+  has_many :responses
 
   include BCrypt
 
