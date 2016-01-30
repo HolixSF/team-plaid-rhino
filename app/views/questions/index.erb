@@ -2,8 +2,10 @@
   <div class="jumbotron">
     <h1>Welcome to PlaidRhinoFlow</h1>
     <p class="lead">This site is about to change your life baby.</p>
-    <p><a class="btn btn-lg btn-success" href="/users/new" role="button">Sign up</a></p>
-    <p>Or <a href="/sessions/new">login!</a></p>
+    <% if !current_user %>
+      <p><a class="btn btn-lg btn-success" href="/users/new" role="button">Sign up</a></p>
+      <p>Or <a href="/sessions/new">login!</a></p>
+    <% end %>
   </div>
 </div>
   <div class="row marketing">

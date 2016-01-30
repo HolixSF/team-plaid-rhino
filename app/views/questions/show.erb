@@ -1,20 +1,60 @@
 <div class='container'>
-<h1><%= @question.title %>?</h1>
-<h4><%= @question.text %>?</h4>
-<br>
-<% @question.answers.each_with_index do |answer, i| %>
-  <div><%= "#{i+1}. #{answer.text}" %></div><br>
-<% end %>
+  <div>
+    <h1><%= @question.title %>?</h1>
+    <h4><%= @question.text %>?</h4>
+  </div>
+
+    <!-- Responses to question -->
+    <div>
+      <% @question.responses.each_with_index do |response, i| %>
+        <div><%= "#{i+1}. #{response.text}" %></div><br>
+      <% end %>
+    </div>
+
+    <!-- Post response to question -->
+    <div>
+      <form class="form-horizontal" method="POST" action="/questions/:id/responses">
+
+        <div class="form-group">
+          <label for="responseQuestion">Response to question:</label>
+          <textarea class="form-control" name="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
+    </div>
+
+  <!-- Answers to question -->
+    <div>
+      <% @question.answers.each_with_index do |answer, i| %>
+        <div><%= "#{i+1}. #{answer.text}" %></div><br>
+
+          <!-- Responses to each answer -->
+          <% answer.responses.each_with_index do |response, j| %>
+            <div><%= "#{j+1}. #{response.text}" %></div><br>
+          <% end %>
+
+          <div>
+            <!-- Post response to question -->
+            <form class="form-horizontal" method="POST" action="/questions/:id/answers/:id/responses">
+              <div class="form-group">
+                <label for="responseAnswer">Response to answer:</label>
+                <textarea class="form-control" name="description" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+
+      <% end %>
+    </div>
+
 </div>
 
 
-
-<br><br><br><br><br><br>
-
-<p>Display response to questions</p>
+<br><br><br>
+<h2>NOTES:</h2>
 <p>Button to respond to question (if logged in)</p>
 
-<p>Displays responses to answers</p>
 <p>button to respond to answer (if logged in)</p>
 
 <p>Displays votes on questions, answers, responses</p>

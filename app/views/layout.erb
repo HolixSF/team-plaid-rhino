@@ -45,11 +45,15 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/sessions/new">Login</a></li>
-            <li role="presentation"><a href="/users/new">Sign up</a></li>
+            <% if !current_user %>
+              <li role="presentation"><a href="/sessions/new">Login</a></li>
+              <li role="presentation"><a href="/users/new">Sign up</a></li>
+            <% else %>
+              <li role="presentation"><a href="/logout">Logout</a></li>
+            <% end %>
           </ul>
         </nav>
-        <h3 class="text-muted"><a href="/">PlaidRhinoFlow</a></h3>
+        <h3 class="text-muted"><a href="/"><img src="/imgs/plaid-rhino.jpg" id="rhino_logo"/>PlaidRhinoFlow</a></h3>
       </div>
 
       <%= yield %>
