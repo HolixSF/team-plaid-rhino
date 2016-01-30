@@ -8,6 +8,6 @@ class CreateResponses < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :responses, :response_to_id
+
   end
 end
