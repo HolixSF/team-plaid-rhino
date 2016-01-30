@@ -1,6 +1,11 @@
-.container {
+/*.container {
   margin: 20px auto;
   width: 720px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
+}
+*/
+
+.text-muted a {
+    color: hotpink;
 }
