@@ -1,11 +1,19 @@
+<div class='container'>
+<h1><%= @question.title %>?</h1>
+<h4><%= @question.text %>?</h4>
+<br>
+<% @question.answers.each_with_index do |answer, i| %>
+  <div><%= "#{i+1}. #{answer.text}" %></div><br>
+<% end %>
+</div>
 
-<p>the id number is <%= @id %></p>
 
-<p>Displays question</p>
+
+<br><br><br><br><br><br>
+
 <p>Display response to questions</p>
 <p>Button to respond to question (if logged in)</p>
 
-<p>Display answers</p>
 <p>Displays responses to answers</p>
 <p>button to respond to answer (if logged in)</p>
 
