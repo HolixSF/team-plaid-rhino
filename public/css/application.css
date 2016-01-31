@@ -1,6 +1,27 @@
-.container {
+/*.container {
   margin: 20px auto;
   width: 720px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
 }
+*/
+
+.text-muted a {
+    color: hotpink;
+    text-decoration: none;
+}
+
+#rhino_logo {
+  width: 60px;
+  margin-right:5px;
+}
+
+.vote-button {
+  width: 15px;
+  height: 15px;
+}
+
+.upvote {
+  margin-bottom: -5px;
+}
+

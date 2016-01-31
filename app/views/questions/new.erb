@@ -1,0 +1,27 @@
+<div class="container">
+  <% if @errors %>
+    <ul>
+      <% @errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <form class="form-horizontal" method="POST" action="/questions">
+
+    <div class="form-group">
+      <label for="question">Ask your question:</label>
+      <input type="text" class="form-control" name="title" placeholder="Where can I buy an iPhone?">
+    </div>
+
+    <div class="form-group">
+      <label for="questionDetails">Provide details:</label>
+      <textarea class="form-control" name="text" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+    <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+
+  </form>
+</div>
