@@ -6,6 +6,15 @@
 
     <!-- Responses to question -->
     <div>
+      <form action='/questions/<%= @question.id %>/votes/new' method='POST' class="upvote">
+        <input type ='hidden' name="vote" value=1>
+        <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" height='50px' width='50px'>
+      </form>
+      <form action='/questions/<%= @question.id %>/votes/new' method='POST' class="downvote">
+        <input type ='hidden' name="vote" value=-1>
+        <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" height='50px' width='50px'>
+      </form>
+      <%= "Votes: #{@vote_total}" %>
       <% @question.responses.each_with_index do |response, i| %>
         <div><%= "#{i+1}. #{response.text}" %></div>
       <% end %>
