@@ -24,6 +24,14 @@ end
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
-  @vote_total = @question.votes.map(&:vote_value).reduce(:+)
+  if @vote = Vote.find_by(vote_for: @question, user_id: session[:user_id])
+    @vote_value = @vote.vote_value
+  end
+
+  if @question.votes.empty?
+    @vote_total = 0
+  else
+    @vote_total = @question.votes.map(&:vote_value).reduce(:+)
+  end
   erb :"/questions/show"
 end
