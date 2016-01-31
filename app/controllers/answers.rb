@@ -5,7 +5,7 @@ end
 
 post '/questions/:id/answers/new' do
   @answer = Answer.new(user_id: session[:user_id], question_id: params[:id], text: params[:text])
-  @question=Question.find(params[:id])
+  @question = Question.find(params[:id])
   if @answer.save
     redirect "/questions/#{params[:id]}"
   else
@@ -17,4 +17,13 @@ post '/questions/:id/answers/new' do
     end
     erb :"/answers/_new"
   end
+end
+
+put '/questions/:id/answers/:answer_id' do
+  answersToQuestion = Answer.where(question_id: params[:id])
+  oldTopAnswer = answersToQuestion.find_by(best_answer: true)
+  oldTopAnswer.update(best_answer: false) if oldTopAnswer
+  newTopAnswer = Answer.find(params[:answer_id])
+  newTopAnswer.update(best_answer: true)
+  redirect "/questions/#{params[:id]}"
 end

@@ -86,7 +86,13 @@
     <div>
       <ol>
         <% @question.answers.each do |answer| %>
-          <li><%= answer.text %></li>
+          <% if answer.best_answer %>
+          <li class='best_answer'>
+          <% else %>
+          <li>
+          <% end %>
+            <%= answer.text %>
+          </li>
           <% vote = Vote.find_by(vote_for: answer, user_id: session[:user_id]) %>
           <% if !vote || vote.vote_value == 1 %>
           <% if session[:user_id] %>
@@ -147,6 +153,15 @@
                 <a href='/sessions/new'> Add your comment to this answer </a>
               <%end%>
           </div>
+          <% if @question.user_id == session[:user_id] %>
+          <div>
+            <form action="/questions/<%= @question.id %>/answers/<%= answer.id %>" method="post" >
+            <label for="bestAnswer">Set this answer as best.</label>
+            <input type="hidden" name="_method" value="put">
+            <input type="submit">
+            </form>
+          </div>
+          <% end %>
           <br><br><br>
 
         <% end %>
