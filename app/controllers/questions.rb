@@ -28,10 +28,10 @@ get '/questions/:id' do
     @vote_value = @vote.vote_value
   end
 
-  if @question.votes.empty?
-    @vote_total = 0
-  else
-    @vote_total = @question.votes.map(&:vote_value).reduce(:+)
-  end
+  # if @question.votes.empty?
+  #   @vote_total = 0
+  # else
+  #   @vote_total = @question.votes.map(&:vote_value).reduce(:+)
+  # end
   erb :"/questions/show"
 end
