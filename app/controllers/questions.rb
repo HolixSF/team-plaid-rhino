@@ -24,5 +24,6 @@ end
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
+  @vote_total = @question.votes.map(&:vote_value).reduce(:+)
   erb :"/questions/show"
 end
