@@ -1,17 +1,18 @@
-post '/login' do
-  user = User.authenticate(email: params[:email], password: params[:password])
-
-  if user
+post '/sessions/new' do
+  if user = User.authenticate(username: params[:username], password: params[:password])
     session[:user_id] = user.id
-    redirect to "users/#{current_user.id}"
+    redirect '/'
   else
-    redirect to home_url # see app/helpers/
+    @error = "Invalid username or password. Please try again."
+    erb :"users/login"
   end
 end
 
-post '/logout' do
-  session[:user_id] = nil
-  @user = nil
+get '/sessions/new' do
+  erb :"users/login"
+end
 
-  redirect to home_url # see app/helpers/
+get '/logout' do
+  session[:user_id] = nil
+  redirect '/'
 end

@@ -1,0 +1,124 @@
+<div class='container'>
+  <div>
+    <h1><%= @question.title %></h1>
+    <h4><%= @question.text %></h4>
+  </div>
+
+    <!-- Responses to question -->
+    <div>
+      <% if !@vote || @vote_value == 1 %>
+      <form action='/questions/<%= @question.id %>/votes/new' method='POST'>
+        <input type ='hidden' name="vote" value=1>
+        <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
+      </form>
+      <% end %>
+      <% if !@vote || @vote_value == -1 %>
+      <form action='/questions/<%= @question.id %>/votes/new' method='POST'>
+        <input type ='hidden' name="vote" value=-1>
+        <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
+      </form>
+      <% end %>
+      <%= "Votes: #{@question.vote_total}" %>
+      <ol>
+        <% @question.responses.each do |response| %>
+          <li><%= response.text %></li>
+          <% vote = Vote.find_by(vote_for: response, user_id: session[:user_id]) %>
+          <% if !vote || vote.vote_value == 1 %>
+            <form action='/questions/<%= @question.id %>/responses/<%= response.id %>/votes/new' method='POST'>
+              <input type ='hidden' name="vote" value=1>
+              <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
+            </form>
+          <% end %>
+          <% if !vote || vote.vote_value == -1 %>
+            <form action='/questions/<%= @question.id %>/responses/<%= response.id %>/votes/new' method='POST'>
+              <input type ='hidden' name="vote" value=-1>
+              <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
+            </form>
+          <% end %>
+          <%= "Votes: #{response.vote_total}" %>
+        <% end %>
+      </ol>
+    </div>
+
+    <!-- Post response to question -->
+    <div>
+      <a href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
+    </div>
+
+    <div>
+      <a href="/questions/<%= @question.id %>/responses/new">Comment on the question</a>
+    </div>
+    <br><br>
+
+
+  <!-- Answers to question -->
+    <div>
+      <ol>
+        <% @question.answers.each do |answer| %>
+          <% if answer.best_answer %>
+          <li class='best_answer'>
+          <% else %>
+          <li>
+          <% end %>
+            <%= answer.text %>
+          </li>
+          <% vote = Vote.find_by(vote_for: answer, user_id: session[:user_id]) %>
+          <% if !vote || vote.vote_value == 1 %>
+            <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/votes/new' method='POST'>
+              <input type ='hidden' name="vote" value=1>
+              <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
+            </form>
+          <% end %>
+          <% if !vote || vote.vote_value == -1 %>
+            <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/votes/new' method='POST'>
+              <input type ='hidden' name="vote" value=-1>
+              <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
+            </form>
+          <% end %>
+          <%= "Votes: #{answer.vote_total}" %>
+          <h5>Comments for this answer:</h5>
+          <!-- Responses to each answer -->
+          <ol>
+            <% answer.responses.each do |response| %>
+              <li><%= response.text %></li>
+              <% vote = Vote.find_by(vote_for: response, user_id: session[:user_id]) %>
+              <% if !vote || vote.vote_value == 1 %>
+                <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new' method='POST'>
+                  <input type ='hidden' name="vote" value=1>
+                  <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
+                </form>
+              <% end %>
+              <% if !vote || vote.vote_value == -1 %>
+                <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new' method='POST'>
+                  <input type ='hidden' name="vote" value=-1>
+                  <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
+                </form>
+              <% end %>
+              <%= "Votes: #{response.vote_total}" %>
+            <% end %>
+          </ol>
+
+          <div>
+            <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/new">Add your comment to this answer</a>
+          </div>
+          <% if @question.user_id == session[:user_id] %>
+          <div>
+            <form action="/questions/<%= @question.id %>/answers/<%= answer.id %>" method="post" >
+            <label for="bestAnswer">Set this answer as best.</label>
+            <input type="hidden" name="_method" value="put">
+            <input type="submit">
+            </form>
+          </div>
+          <% end %>
+          <br><br><br>
+
+        <% end %>
+      </ol>
+
+</div>
+
+
+<br><br><br>
+<h2>NOTES:</h2>
+<p>Displays votes on questions, answers, responses</p>
+<p>Button to vote on questions, answers, responses (if logged in)</p>
