@@ -1,0 +1,51 @@
+'/questions/<%= @question.id %>/ #answers/<%= answer.id %>/votes/new' < -- answers to questions
+
+  <!-- Responses to question -->
+'/questions/<%= @question.id %>/ #responses/<%= response.id %>/votes/new' <-
+
+/questions/<%= @question.id %>/votes/new
+ <!-- Post response to question -->
+/questions/<%= @question.id %>/answers/new
+
+/questions/<%= @question.id %>/responses/new
+
+/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new'
+/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/new
+
+
+<% def question_page_redirect(section, type, vote_value_integer) #type can be link or vote, section is section of page, vote_value_integer is upvote or downvote
+ if session[:user_id]
+    path_start = "/questions/<%= @question.id%>"
+        if type == 'vote'
+            if section = 'answer' %>
+                    <form action= "<%= path_start %>/answers/<%= answer.id %>/votes/new" method='POST'>
+            <% elsif section == 'question' %>
+                     <form action='<%= path_start %>/votes/new' method='POST'>
+            <% elsif section == 'response_to_question' %>
+                    <form action= "<%= path_start %>/responses/<%= response.id %>/votes/new" method='POST'>
+            <% elsif section == 'response_to_answer' %>
+                    <form action= "<%= path_start %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new" method='POST'>
+            <% end %>
+            <input type ='hidden' name="vote" value=<%vote_value_integer%>>
+        <%elsif type == 'link'
+            if section = 'answer' %>
+                <a href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
+            <% elsif section == 'response_to_question'%>
+                <a href="/questions/<%= @question.id %>/responses/new">Comment on the question</a>
+            <% elsif section == 'response_to_answer'%>
+                <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/new">Add your comment to this answer</a>
+        <%end%>
+    <% end %>
+    <%else %>
+        <form action='/sessions/new' method='GET'>
+<%end%>
+
+
+
+
+
+
+
+
+
+%>
