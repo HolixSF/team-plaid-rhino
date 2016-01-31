@@ -16,3 +16,8 @@ get '/logout' do
   session[:user_id] = nil
   redirect '/'
 end
+
+
+get "/session-viewer" do
+  session.inspect
+end

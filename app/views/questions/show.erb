@@ -7,12 +7,23 @@
     <!-- Responses to question -->
     <div>
       <% if !@vote || @vote_value == 1 %>
+      <%if session[:user_id] %>
       <form action='/questions/<%= @question.id %>/votes/new' method='POST'>
         <input type ='hidden' name="vote" value=1>
+        <%else%>
+      <form action='/sessions/new' method='GET'>
+        <%end%>
         <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
       </form>
       <% end %>
       <% if !@vote || @vote_value == -1 %>
+      <%if session[:user_id] %>
+      <form action='/questions/<%= @question.id %>/votes/new' method='POST'>
+        <input type ='hidden' name="vote" value=-1>
+        <%else%>
+      <form action='/sessions/new' method='GET'>
+        <!-- should bring information with it to redirect back to the page with after logging in. -->
+        <%end%>
       <form action='/questions/<%= @question.id %>/votes/new' method='POST'>
         <input type ='hidden' name="vote" value=-1>
         <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
@@ -24,14 +35,24 @@
           <li><%= response.text %></li>
           <% vote = Vote.find_by(vote_for: response, user_id: session[:user_id]) %>
           <% if !vote || vote.vote_value == 1 %>
+          <% if session[:user_id] %>
             <form action='/questions/<%= @question.id %>/responses/<%= response.id %>/votes/new' method='POST'>
               <input type ='hidden' name="vote" value=1>
+              <% else %>
+              <form action='/sessions/new' method='GET'>
+            <%end%>
+
               <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
             </form>
-          <% end %>
+
+          <%end %>
           <% if !vote || vote.vote_value == -1 %>
+          <% if session[:user_id] %>
             <form action='/questions/<%= @question.id %>/responses/<%= response.id %>/votes/new' method='POST'>
               <input type ='hidden' name="vote" value=-1>
+            <% else %>
+              <form action='/sessions/new' method='GET'>
+            <%end%>
               <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
             </form>
           <% end %>
@@ -41,6 +62,7 @@
     </div>
 
     <!-- Post response to question -->
+    <% if session[:user_id] %>
     <div>
       <a href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
     </div>
@@ -48,6 +70,15 @@
     <div>
       <a href="/questions/<%= @question.id %>/responses/new">Comment on the question</a>
     </div>
+    <% else %>
+    <div>
+      <a href="/sessions/new">Answer the question</a>
+    </div>
+
+    <div>
+      <a href="/sessions/new">Comment on the question</a>
+    </div>
+    <%end%>
     <br><br>
 
 
@@ -64,14 +95,22 @@
           </li>
           <% vote = Vote.find_by(vote_for: answer, user_id: session[:user_id]) %>
           <% if !vote || vote.vote_value == 1 %>
+          <% if session[:user_id] %>
             <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/votes/new' method='POST'>
               <input type ='hidden' name="vote" value=1>
+              <% else %>
+              <form action='/sessions/new' method='GET'>
+            <%end%>
               <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
             </form>
           <% end %>
           <% if !vote || vote.vote_value == -1 %>
+          <% if session[:user_id] %>
             <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/votes/new' method='POST'>
               <input type ='hidden' name="vote" value=-1>
+            <% else %>
+              <form action='/sessions/new' method='GET'>
+            <%end%>
               <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
             </form>
           <% end %>
@@ -83,14 +122,23 @@
               <li><%= response.text %></li>
               <% vote = Vote.find_by(vote_for: response, user_id: session[:user_id]) %>
               <% if !vote || vote.vote_value == 1 %>
+              <% if session[:user_id] %>
                 <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new' method='POST'>
                   <input type ='hidden' name="vote" value=1>
+              <% else %>
+                <form action='/sessions/new' method='GET'>
+            <%end%>
                   <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Arrow_up_font_awesome.svg/512px-Arrow_up_font_awesome.svg.png' alt = "Submit" class="vote-button upvote">
                 </form>
               <% end %>
               <% if !vote || vote.vote_value == -1 %>
+              <% if session[:user_id] %>
                 <form action='/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new' method='POST'>
                   <input type ='hidden' name="vote" value=-1>
+
+              <% else %>
+                <form action='/sessions/new' method='GET'>
+              <%end%>
                   <input type='image'  src ='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Arrow_down_font_awesome.svg/512px-Arrow_down_font_awesome.svg.png' alt = "Submit" class="vote-button downvote">
                 </form>
               <% end %>
@@ -99,7 +147,11 @@
           </ol>
 
           <div>
+            <% if session[:user_id] %>
             <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/new">Add your comment to this answer</a>
+            <% else %>
+                <a href='/sessions/new'> Add your comment to this answer </a>
+              <%end%>
           </div>
           <% if @question.user_id == session[:user_id] %>
           <div>
