@@ -5,4 +5,13 @@ class Response < ActiveRecord::Base
   has_many :votes, as: :vote_for
 
   validates :text, presence: true
+
+  def vote_total
+    if self.votes.empty?
+      return 0
+    else
+      return self.votes.map(&:vote_value).reduce(:+)
+    end
+  end
+
 end
