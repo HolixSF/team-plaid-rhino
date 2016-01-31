@@ -15,3 +15,13 @@
   width: 60px;
   margin-right:5px;
 }
+
+.vote-button {
+  width: 15px;
+  height: 15px;
+}
+
+.upvote {
+  margin-bottom: -5px;
+}
+
