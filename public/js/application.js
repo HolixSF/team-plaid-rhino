@@ -6,32 +6,23 @@ $(document).ready(function() {
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   $('.answer-question').click(function(e){
     e.preventDefault();
-
     var url = $(this).attr('href');
-    console.log(url);
     $(this).hide();
-   var aRequest = $.get(url);
-   aRequest.done(function(response){
-        console.log(response);
-        console.log(this);
-        console.log($(this).parent());
-
-
-            $(".question-comments").append(response);
-    });});
+    var aRequest = $.get(url);
+    aRequest.done(function(response){
+    $(".question-comments").append(response);
+    });
+  });
 
  $('.comment-question').click(function(e){
-    e.preventDefault();
-  $(this).hide();
+      e.preventDefault();
+      $(this).hide();
       var url = $(this).attr('href');
-     
       var bRequest = $.get(url);
       bRequest.done(function(response){
             $(".question-comments").append(response);
     });
-
-
-  })
+  });
 
  $('.answer-response').click(function(e){
     e.preventDefault();
@@ -39,34 +30,26 @@ $(document).ready(function() {
       var url = $(this).attr('href');
       var obj = $(this)
       var bRequest = $.get(url);
-
       bRequest.done(function(response){
           obj.parent().append(response)
     });
+  });
 
-      $('.answer-response').click(function(e){
-    e.preventDefault();
-      $(this).hide();
-      var url = $(this).attr('href');
-      var obj = $(this)
-      var bRequest = $.get(url);
+ 
 
-      bRequest.done(function(response){
-          obj.parent().append(response)
-    });
+$(".vote-button-upvote-link").click(function(e){
+  e.preventDefault();
+  var obj = $(this);
+  var url = $(this).attr('href');
+  console.log('this works');
+  debugger
+  var bRequest = $.post(url);
+  bRequest.done(function(response){
+    $("#question-voting").html(response)
+  });
+    
 
-
-  })
-
-  // $('.answer_submit').submit(function(e){
-  //   e.preventDefault();
-  //   $.ajax({url: "/questions/<%=question.id %>/answers/new",
-  //       method: 'POST'})
-  //   // .done(function(response){
-  //           // $(".question-comments").append(response);
-  //       })
-
-
+});
 
 
 });

@@ -12,6 +12,8 @@
 .vote-button {
   width: 15px;
   height: 15px;
+  float: left;
+  margin-right: 5px
 }
 
 #login p {
