@@ -11,11 +11,17 @@
 
 </div>
 
+
 <div class="row marketing">
 
-  <div class="col-md-6 col-md-offset-3 post-question">
-    <a class="btn btn-primary" href="/questions/new" role="button">Post Question</a>
-  </div>
+    <div class="col-md-6 col-md-offset-3 post-question">
+      <% if session[:user_id] %>
+      <a class="btn btn-primary" href="/questions/new" role="button">Post Question</a>
+      <% else %>
+      <a class="btn btn-primary" href="/sessions/new" role="button">Post Question</a>
+      <%end%>
+    </div>
+
 
   <div class="col-md-6 col-md-offset-3">
     <div class="content">

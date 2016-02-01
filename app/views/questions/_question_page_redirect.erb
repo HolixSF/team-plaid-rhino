@@ -1,0 +1,27 @@
+<%  if session[:user_id] %>
+   <% path_start = "/questions/#{@question.id}"%>
+        <% if type == 'vote' %>
+           <% if section == 'answer' %>
+                    <form action= "<%= path_start %>/answers/<%= answer.id %>/votes/new" method='POST'>
+            <% elsif section == 'question' %>
+                     <form action='<%= path_start %>/votes/new' method='POST'>
+            <% elsif section == 'response_to_question' %>
+                    <form action= "<%= path_start %>/responses/<%= response.id %>/votes/new" method='POST'>
+            <% else #section == 'response_to_answer' %>
+                    <form action= "<%= path_start %>/answers/<%= answer.id %>/responses/<%= response.id %>/votes/new" method='POST'>
+            <% end %>
+            <input type ='hidden' name="vote" value=<%vote_value_integer%>>
+        <% else %>
+           <% if section == 'answer' %>
+                <a href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
+            <% elsif section == 'response_to_question'%>
+                <a href="/questions/<%= @question.id %>/responses/new">Comment on the question</a>
+            <% else %>
+                <a href="/questions/<%= @question.id %>/answers/<%= answer.id %>/responses/new">Add your comment to this answer</a>
+            <%end%>
+        <%end%>
+    <%else %>
+<form action='/sessions/new' method='GET'>
+<%end%>
+
+
