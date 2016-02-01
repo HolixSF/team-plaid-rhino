@@ -43,28 +43,9 @@ $(document).ready(function() {
       bRequest.done(function(response){
           obj.parent().append(response)
     });
-
-      $('.answer-response').click(function(e){
-    e.preventDefault();
-      $(this).hide();
-      var url = $(this).attr('href');
-      var obj = $(this)
-      var bRequest = $.get(url);
-
-      bRequest.done(function(response){
-          obj.parent().append(response)
     });
 
 
-  })
-
-  // $('.answer_submit').submit(function(e){
-  //   e.preventDefault();
-  //   $.ajax({url: "/questions/<%=question.id %>/answers/new",
-  //       method: 'POST'})
-  //   // .done(function(response){
-  //           // $(".question-comments").append(response);
-  //       })
 
 
 

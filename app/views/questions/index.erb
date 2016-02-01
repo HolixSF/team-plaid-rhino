@@ -2,7 +2,7 @@
 
   <div class="jumbotron container">
     <h1>Welcome to PlaidRhinoFlow</h1>
-    <p class="lead">This site is about to change your life baby.</p>
+    <p class="lead">This site is about to change your life, baby.</p>
     <% if !current_user %>
       <p><a class="btn btn-xs btn-warning" href="/users/new" role="button">Sign up</a></p>
       <p><a class="btn btn-xs btn-info" href="/sessions/new">Log In!</a></p>
@@ -31,16 +31,19 @@
         </div>
         <div class="details">
           <div class="answers">
-            <span>0</span>
+            <span><%=question.answers.length %></span>
             <a href="/questions/<%=question.id%>">answers</a>
           </div>
-          <div class="votes">
-            <span>0</span>
-            <a href="/questions/<%=question.id%>">votes</a>
-          </div>
           <div class="views">
-            <span>0</span>
-            <a href="/questions/<%=question.id%>">views</a>
+            <span><%=question.responses.length %></span>
+            <a href="/questions/<%=question.id%>">comments</a>
+          </div> 
+          <div class="votes">
+          <span><%  if question.vote_total %>
+            <%= "#{question.vote_total}" %>
+           <%else%> 0 
+             <%end%></span>
+            <a href="/questions/<%=question.id%>">votes</a>
           </div>
         </div>
         <br class="clear">

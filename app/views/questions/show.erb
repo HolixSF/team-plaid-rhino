@@ -1,8 +1,14 @@
 <div class='container'>
   <div>
+    <%if (@question.id) -1 != 0 %> 
+    <a id = 'last_question' href= "/questions/<%= (@question.id) -1 %>"> << Last Question</a>
+    <%end%>
+    <a id = 'next_question' href= "/questions/<%= (@question.id) +1 %>"> Next Question >> </a>
     <h1><%= @question.title %></h1>
     <h4><%= @question.text %></h4>
   </div>
+
+
 
 
   <div>
