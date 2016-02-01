@@ -8,11 +8,11 @@ class Question < ActiveRecord::Base
   validates :title, presence: { message: "Question can't be blank" }
 
   def vote_total
-    # if self.votes.empty?
-    #   return 0
-    # else
+    if self.votes.empty?
+      return 0
+    else
       return self.votes.map(&:vote_value).reduce(:+)
-    # end
+    end
   end
 
 end

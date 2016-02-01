@@ -1,15 +1,9 @@
 post '/questions/:id/votes/new' do
   @question = Question.find(params[:id])
   if !Vote.find_by(vote_for: @question, user_id: session[:user_id])
-   Vote.create(user_id: session[:user_id], vote_for: @question, vote_value: params[:vote])
+    Vote.create(user_id: session[:user_id], vote_for: @question, vote_value: params[:vote])
   end
-  @vote = Vote.find_by(user_id: session[:user_id], vote_for: @question, vote_value: params[:vote])
-  puts "THIS IS A VOTE TOTAL #{@question.vote_total}"
-    if request.xhr?
-      erb :"/votes/_new_votes", layout: false, locals: {question: @question, answer: @answer, vote: @vote, vote_total: @question.vote_total}
-    else
-    redirect "/questions/#{params[:id]}"
-  end
+  redirect "/questions/#{params[:id]}"
 end
 
 post '/questions/:q_id/responses/:r_id/votes/new' do
