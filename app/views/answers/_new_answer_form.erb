@@ -1,4 +1,4 @@
-<form class="form-horizontal answer-form" method="POST" action="/questions/<%=question.id %>/answers/new">
+<form class="form-horizontal answer-form" action='/questions/<%= @question.id %>/answers/new' method = 'POST' >
 
     <div class="form-group">
       <label for="answer">Write your answer:</label>
@@ -6,7 +6,7 @@
     </div>
 
     <div class="form-group">
-    <button type="submit" class="btn btn-default answer_submit">Submit</button>
+    <button type="submit" class="btn btn-default"> Submit</button>
     </div>
 
   </form>

@@ -1,0 +1,10 @@
+<div class="container" >
+  <% if @errors %>
+    <ul>
+      <% @errors.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= erb :'/responses/_new_to_answer', layout: false, locals: {question: @question, answer: @answer} %>
+</div>

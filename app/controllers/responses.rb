@@ -2,7 +2,7 @@
 
 get '/questions/:id/responses/new' do
   @question = Question.find(params[:id])
-  erb :"responses/_new_to_question"
+  erb :"responses/_new_to_question", layout: false
 end
 
 post '/questions/:id/responses' do
@@ -23,7 +23,11 @@ end
 get '/questions/:q_id/answers/:r_id/responses/new' do
   @question = Question.find(params[:q_id])
   @answer = Answer.find(params[:r_id])
-  erb :"responses/_new_to_answer"
+  if request.xhr?
+    erb :"/responses/_new_to_answer", layout: false, locals: {question: @question, answer: @answer}
+  else
+    redirect "/questions/#{@question.id}"
+  end
 end
 
 post '/questions/:q_id/answers/:r_id/responses' do

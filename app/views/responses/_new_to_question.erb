@@ -1,21 +1,11 @@
-    <!-- Post response to question -->
-<div class="container">
-  <% if @errors %>
-    <ul>
-      <% @errors.each do |error| %>
-        <li><%= error %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <form class="form-horizontal" method="POST" action="/questions/<%= @question.id %>/responses">
+  <form class="form-horizontal response-form"  action="/questions/<%= @question.id %>/responses" method="POST">
 
     <div class="form-group">
       <label for="responseQuestion">Response to question:</label>
       <textarea class="form-control" name="text" rows="3"></textarea>
     </div>
 
-    <div>
+    <div class='form-group'>
     <button type="submit" class="btn btn-default">Submit</button>
     </div>
 
