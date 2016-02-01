@@ -1,18 +1,11 @@
-/*.container {
-  margin: 20px auto;
-  width: 720px;
-  padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
-}
-*/
-
 .text-muted a {
     color: hotpink;
     text-decoration: none;
 }
 
 #rhino_logo {
-  width: 60px;
+  width: 70px;
+  height: 60px;
   margin-right:5px;
 }
 
@@ -21,7 +14,68 @@
   height: 15px;
 }
 
+#login p {
+
+}
+#login a:hover {
+  text-decoration: none;
+  color: white;
+}
+
 .upvote {
   margin-bottom: -5px;
 }
 
+.post-question {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.post {
+  border-top: 1px solid #c3c3c3;
+  /*border-bottom: 1px solid #c3c3c3;*/
+  list-style: none;
+  text-align: left;
+  padding: 20px;
+  margin: 10px;
+  /*border-radius: 10px;*/
+}
+
+.questions ul li {
+  padding-right: 10px;
+  display: inline-block;
+  list-style: none;
+}
+
+.title {
+  float: left;
+}
+
+.title a:link {
+  text-decoration: none;
+}
+
+.details {
+  float: right;
+}
+
+.details a {
+  text-decoration: none;
+  color: #acacac;
+}
+
+.clear {
+  clear: both;
+}
+
+.answers {
+  padding: 5px;
+}
+
+.votes {
+  padding: 5px;
+}
+
+.views {
+  padding: 5px;
+}

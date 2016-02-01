@@ -44,7 +44,7 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="/">Home</a></li>
+            <li role="presentation"><a href="/">Home</a></li>
             <% if !current_user %>
               <li role="presentation"><a href="/sessions/new">Login</a></li>
               <li role="presentation"><a href="/users/new">Sign up</a></li>
@@ -56,12 +56,13 @@
         <h3 class="text-muted"><a href="/"><img src="/imgs/plaid-rhino.jpg" id="rhino_logo"/>PlaidRhinoFlow</a></h3>
       </div>
 
+
       <%= yield %>
 
-      <footer class="footer">
-        <p>&copy; 2016 &copy; PlaidRhinos</p>
-      </footer>
 
+      <footer class="footer">
+        <p>PlaidRhinos &copy; 2016</p>
+      </footer>
     </div> <!-- /container -->
 
     <script src="/js/application.js"></script>
