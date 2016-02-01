@@ -1,12 +1,18 @@
 get '/questions/:id/answers/new' do
   @question=Question.find(params[:id])
-  erb :"/answers/_new"
+  if request.xhr?
+      erb :'/answers/_new_answer_form', layout: false, locals: {question: @question}
+  else
+      erb :"/answers/_new"
+  end
 end
 
 post '/questions/:id/answers/new' do
   @answer = Answer.new(user_id: session[:user_id], question_id: params[:id], text: params[:text])
   @question = Question.find(params[:id])
   if @answer.save
+    # if request.xhr?
+
     redirect "/questions/#{params[:id]}"
   else
     if @answer.errors

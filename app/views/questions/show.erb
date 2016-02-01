@@ -30,7 +30,7 @@
       </form>
       <% end %>
       <%= "Votes: #{@question.vote_total}" %>
-      <ol>
+      <ol class="question-comments">
         <% @question.responses.each do |response| %>
           <li><%= response.text %></li>
           <% vote = Vote.find_by(vote_for: response, user_id: session[:user_id]) %>
@@ -64,7 +64,7 @@
     <!-- Post response to question -->
     <% if session[:user_id] %>
     <div>
-      <a href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
+      <a class = 'answer-question' href="/questions/<%= @question.id %>/answers/new">Answer the question</a>
     </div>
 
     <div>
