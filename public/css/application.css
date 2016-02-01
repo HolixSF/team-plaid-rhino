@@ -23,7 +23,16 @@
 }
 
 .upvote {
+  margin-top: 5px;
   margin-bottom: -5px;
+  float: left;
+  margin-right: 5px;
+}
+.downvote {
+  margin-top: 5px;
+  /*margin-bottom: -5px;*/
+  float: left;
+  margin-right: 5px;
 }
 
 
