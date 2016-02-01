@@ -12,8 +12,8 @@ post '/questions/:id/answers/new' do
   @question = Question.find(params[:id])
   if @answer.save
     # if request.xhr?
-
-    redirect "/questions/#{params[:id]}"
+  # erb :questions
+     redirect "/questions/#{params[:id]}"
   else
     if @answer.errors
       @errors = []
