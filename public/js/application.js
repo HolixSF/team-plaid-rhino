@@ -4,10 +4,34 @@ $(document).ready(function() {
   // when we try to bind to them
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
-  $('.new_upvote').click(function(e){
+  $('.answer-question').click(function(e){
     e.preventDefault();
 
+    var url = $(this).attr('href');
+    console.log(url);
+    $(this).hide();
+   var aRequest = $.get(url);
+   aRequest.done(function(response){
+        console.log(response);
+        console.log(this);
+        console.log($(this).parent());
+
+
+            $(".question-comments").append(response);
+    })
+
+
+
+
   })
+
+  // $('.answer_submit').submit(function(e){
+  //   e.preventDefault();
+  //   $.ajax({url: "/questions/<%=question.id %>/answers/new",
+  //       method: 'POST'})
+  //   // .done(function(response){
+  //           // $(".question-comments").append(response);
+  //       })
 
 
 
