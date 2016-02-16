@@ -10,6 +10,7 @@ post '/questions/:id/responses' do
   response = Response.new(user_id: session[:user_id], text: params[:text], response_to: @question)
 
   if response.save
+    Activity[session[:user_id]] = "Posted comment on question: #{@question.title}"
     redirect "/questions/#{@question.id}"
   else
     @errors = response.errors.full_messages
@@ -36,6 +37,7 @@ post '/questions/:q_id/answers/:r_id/responses' do
   response = Response.new(user_id: session[:user_id], text: params[:text], response_to: @answer)
 
   if response.save
+    Activity[session[:user_id]] = "Posted comment on answer: #{@answer.text}"
     redirect "/questions/#{@question.id}"
   else
     @errors = response.errors.full_messages

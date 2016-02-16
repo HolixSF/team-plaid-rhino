@@ -42,7 +42,12 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rake (10.5.0)
+    redis (3.2.2)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     ripl (0.7.1)
       bond (~> 0.5.1)
     ripl-multi_line (0.3.1)
@@ -108,7 +113,10 @@ DEPENDENCIES
   pg
   pry
   rack-test
+  rails-observers
   rake
+  redis
+  redis-namespace
   rspec
   shotgun
   shoulda-matchers

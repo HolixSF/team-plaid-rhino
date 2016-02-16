@@ -7,8 +7,13 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 require 'rubygems'
 
+require 'rails-observers'
+
 require 'uri'
 require 'pathname'
+
+require 'redis'
+require 'redis-namespace'
 
 require 'pg'
 require 'bcrypt'
@@ -53,6 +58,10 @@ configure do
   set :views, File.join(Sinatra::Application.root, "app", "views")
   set :partial_template_engine, :erb
   enable :partial_underscores
+
+  $redis = Redis::Namespace.new("my_app", :redis => Redis.new)
+
+
 end
 
 # Set up the controllers and helpers
@@ -61,3 +70,4 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
