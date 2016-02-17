@@ -1,0 +1,9 @@
+<div class="container">
+  <form class="form-horizontal" method="POST" action="/questions/<%= @question.id %>/answers/<%= @answer.id %>/responses">
+    <div class="form-group">
+      <label for="responseAnswer">Response to answer:</label>
+      <textarea class="form-control" name="text" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>

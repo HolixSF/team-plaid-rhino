@@ -1,0 +1,64 @@
+<div class="container">
+
+  <% if !current_user %>
+   <div class="jumbotron container">
+    <h1>Welcome to PlaidRhinoFlow</h1>
+    <p class="lead">This site is about to change your life, baby.</p>
+      <p><a class="btn btn-xs btn-warning" href="/users/new" role="button">Sign up</a></p>
+      <p><a class="btn btn-xs btn-info" href="/sessions/new">Log In!</a></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-3 post-question">
+      <% if session[:user_id] %>
+      <a class="btn btn-primary" href="/questions/new" role="button">Post Question</a>
+      <%end%>
+    </div>
+
+
+    <div class="row">
+
+  <div class="col-md-6 col-md-offset-1">
+    <div class="content">
+      <% @questions.each do |question| %>
+      <div class="post">
+        <div class="title"><h3><a href="/questions/<%=question.slug%>"><%= question.title %></a></h3>
+        </div>
+        <div class="details">
+          <div class="answers">
+            <span><%=question.answers.length %></span>
+            <a href="/questions/<%=question.id%>">answers</a>
+          </div>
+          <div class="views">
+            <span><%=question.responses.length %></span>
+            <a href="/questions/<%=question.id%>">comments</a>
+          </div>
+          <div class="votes">
+          <span><%  if question.vote_total %>
+            <%= "#{question.vote_total}" %>
+           <%else%> 0
+             <%end%></span>
+            <a href="/questions/<%=question.id%>">votes</a>
+          </div>
+        </div>
+        <br class="clear">
+      </div>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <table class="table table-hover">
+        <tr><th>Your Recent Activities</th></tr>
+        <% @activities.each_with_index do |activity, index| %>
+          <tr><td><%= "#{index + 1}. #{activity}" %></td></tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+
+</div>

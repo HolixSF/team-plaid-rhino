@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
+gem 'rails-observers'
+
+gem 'redis'
+gem 'redis-namespace'
+
 # Sinatra driver
 gem 'sinatra'
 gem 'sinatra-contrib'
@@ -22,6 +27,8 @@ gem 'activesupport'
 
 # Includes ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+
+
 
 
 group :test do
