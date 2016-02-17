@@ -9,7 +9,7 @@ class Slug
 
     def []=(slug, id) #Slug[bob_cat] = some_id
       if old = self[slug] #if slug already exists, set old = id
-        redis.srem(set(old), slug) #set(old) => post_slugs_3, redis.srem(post_slugs_3, bob_cat) will remove slug from the set of slugs within the set of slugs for post with id 3
+        redis.srem(set(old), slug) #set(old) => post_slugs_3, redis.srem(post_slugs_3, bob_cat) will remove slug from the set of slugs for post with id 3
       end
       redis.hset(hash, slug, id) #set id of post as value of the key value slug
       redis.sadd(set(id), slug) #add slug to the set of slugs for specific post.

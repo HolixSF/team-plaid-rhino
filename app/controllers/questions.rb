@@ -9,11 +9,12 @@ get '/questions/new' do
 end
 
 post '/questions' do
-  slug = params[:title].split(" ").join("_")
+  slug = params[:title].gsub(/\?.*/, '').split(" ").join("_")
   @question = Question.new(user_id: session[:user_id], title: params[:title], text: params[:text], slug: slug)
   if @question.save
     Slug[@question.slug] = @question.id.to_s
     Activity[session[:user_id]] = "Asked Question: #{params[:title]}"
+
     redirect "/questions/#{@question.id}"
   else
     if @question.errors

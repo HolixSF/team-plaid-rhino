@@ -1,12 +1,16 @@
 class Activity
   class << self
-    def [](id) #user_id
-      redis.lrange(list(id), 0, 9) #not sure if correct syntax
-    end
 
     def []=(id, activity)
+      # redis.lpush("user_#{id}_activity", activity)
+      # redis.ltrim("user_#{id}_activity", 0, 9)
       redis.lpush(list(id), activity)
       redis.ltrim(list(id), 0, 9)
+    end
+
+    def [](id) #user_id
+      # redis.lrange("user_#{id}_activity", 0, 9)
+      redis.lrange(list(id), 0, 9)
     end
 
     # def destroy(id)
