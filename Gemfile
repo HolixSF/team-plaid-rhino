@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
+gem 'rails-observers'
+
+gem 'redis'
+gem 'redis-namespace'
+
 # Sinatra driver
 gem 'sinatra'
 gem 'sinatra-contrib'

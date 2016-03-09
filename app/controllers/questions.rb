@@ -1,4 +1,5 @@
 get '/questions' do
+  @activities = Activity[session[:user_id]]
   @questions = Question.all
   erb :"questions/index"
 end
@@ -8,8 +9,12 @@ get '/questions/new' do
 end
 
 post '/questions' do
-  @question = Question.new(user_id: session[:user_id], title: params[:title], text: params[:text])
+  slug = params[:title].gsub(/\?.*/, '').split(" ").join("_")
+  @question = Question.new(user_id: session[:user_id], title: params[:title], text: params[:text], slug: slug)
   if @question.save
+    Slug[@question.slug] = @question.id.to_s
+    Activity[session[:user_id]] = "Asked Question: #{params[:title]}"
+
     redirect "/questions/#{@question.id}"
   else
     if @question.errors
@@ -23,15 +28,15 @@ post '/questions' do
 end
 
 get '/questions/:id' do
-  @question = Question.find(params[:id])
+  if id = Slug[params[:id]]
+   @question = Question.find(id)
+  else
+    @question = Question.find(params[:id])
+  end
+
   if @vote = Vote.find_by(vote_for: @question, user_id: session[:user_id])
     @vote_value = @vote.vote_value
   end
 
-  # if @question.votes.empty?
-  #   @vote_total = 0
-  # else
-  #   @vote_total = @question.votes.map(&:vote_value).reduce(:+)
-  # end
   erb :"/questions/show"
 end

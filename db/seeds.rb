@@ -9,12 +9,15 @@ require 'faker'
 end
 
 15.times do
+  title = Faker::Company.catch_phrase
   question= Question.create(
   user_id: rand(1..4),
-  title: Faker::Company.catch_phrase,
-  text: Faker::Company.bs
+  title: title,
+  text: Faker::Company.bs,
+  slug: title.split(" ").join("_")
   )
   question.save
+  Slug[question.slug] = question.id.to_s
 end
 
 40.times do

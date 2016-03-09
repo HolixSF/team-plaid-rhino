@@ -11,6 +11,7 @@ post '/questions/:id/answers/new' do
   @answer = Answer.new(user_id: session[:user_id], question_id: params[:id], text: params[:text])
   @question = Question.find(params[:id])
   if @answer.save
+    Activity[session[:user_id]] = "Answered: #{@question.title}"
     # if request.xhr?
   # erb :questions
      redirect "/questions/#{params[:id]}"
